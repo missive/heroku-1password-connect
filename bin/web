@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# decode credentials from OP_CREDENTIALS_BASE64 into the config file
+echo $OP_CREDENTIALS_BASE64 | base64 --decode > ~/.op/1password-credentials.json
+
+# connect-sync exposes a health endpoint at port 8080 by default, which could conflict with
+# default port for connect-api. Switching to 8081 prevents that.
+OP_HTTP_PORT=8081 /bin/connect-sync &
+
+# sleep to allow connect-sync to initialize the database and establish connection
+sleep 1
+# run on $PORT for Heroku compatibility
+OP_HTTP_PORT=${PORT:-8080} /bin/connect-api &
+
+# wait for any process to exit
+wait -n
+
+# exit with exit status of that process
+exit $?
