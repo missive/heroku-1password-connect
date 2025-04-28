@@ -1,4 +1,4 @@
-FROM heroku/heroku:22 AS production
+FROM ubuntu:latest
 
 COPY --from=1password/connect-sync /bin/connect-sync /bin/connect-sync
 COPY --from=1password/connect-api /bin/connect-api /bin/connect-api

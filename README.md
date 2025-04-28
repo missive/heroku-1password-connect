@@ -1,7 +1,7 @@
-# 1Password Connect Heroku deployment
+# 1Password Connect single-container deployment
 
-A wrapper to run both connect-api and connect-sync in one Heroku dyno, for deployment in private spaces.
+A wrapper to run both connect-api and connect-sync in one ECS task, circumventing the awkward conflicting use of the OP_HTTP_PORT variable in both images. This makes deploying 1Password Connect through Ma a breeze.
 
 ## Configuration
 
-* `OP_CREDENTIALS_BASE64` - base64-encoded 1password-credentials.json file. Set with `heroku config:set  OP_CREDENTIALS_BASE64=$(cat ~/Downloads/1password-credentials.json | base64)`.
+* `OP_SESSION` - Must be passed as an ENV var, ideally as a secret in Parameter Store.

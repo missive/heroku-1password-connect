@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # decode credentials from OP_CREDENTIALS_BASE64 into the config file
-echo $OP_CREDENTIALS_BASE64 | base64 --decode > ~/.op/1password-credentials.json
+echo $OP_SESSION | base64 --decode > ~/.op/1password-credentials.json
 
 # connect-sync exposes a health endpoint at port 8080 by default, which could conflict with
 # default port for connect-api. Switching to 8081 prevents that.
