@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # decode credentials from OP_CREDENTIALS_BASE64 into the config file
-mkdir -p ~/.op
 echo $OP_SESSION | base64 --decode > ~/.op/1password-credentials.json
 
 # connect-sync exposes a health endpoint at port 8080 by default, which could conflict with
